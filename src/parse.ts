@@ -58,7 +58,6 @@ const enum ControlChars {
 /** 
  * Parses arbitary byte chunks into EventSource line buffers.
  * Each line should be of the format "field: value" and ends with \r, \n, or \r\n. 
- * @param onLine A function that will be called on each new EventSource line.
  * @returns A function generator that should be called for each incoming byte chunk.
  */
 export function getLines() {
@@ -136,8 +135,6 @@ export function getLines() {
 
 /** 
  * Parses line buffers into EventSourceMessages.
- * @param onId A function that will be called on each `id` field.
- * @param onRetry A function that will be called on each `retry` field.
  * @returns A function generator that should be called for each incoming line buffer.
  */
 export function getMessages() {
