@@ -3,6 +3,10 @@ name: Publish to npm
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -39,7 +43,7 @@ jobs:
             const { execSync } = require('child_process');
             execSync(`git config --global user.email "Samuel.Mendenhall@gmail.com"`);
             execSync(`git config --global user.name "Samuel Mendenhall"`);
-            execSync(`git remote set-url origin https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git`);
+            execSync(`git remote set-url origin "https://${{ secrets.GH_TOKEN }}@github.com/engineersamuel/fetch-event-source-stream.git"`);
             execSync('git add package.json');
             execSync(`git commit -am "Bump version to ${newVersion}"`);
             execSync(`git tag v${newVersion}`);
