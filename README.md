@@ -22,7 +22,7 @@ This library provides an alternate interface for consuming server-sent events, b
 # Install
 
 ```sh
-npm i engineersamuel/fetch-event-source-stream
+npm i -s @engineersamuel/fetch-event-source-stream
 ```
 
 # Usage
