@@ -1,9 +1,6 @@
 name: Publish to npm
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
@@ -29,6 +26,8 @@ jobs:
       - name: Bump version and push tag
         id: bump_version
         uses: actions/github-script@v6
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
           script: |
             const semver = require('semver');
