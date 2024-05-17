@@ -3,7 +3,10 @@
   "version": "1.0.1",
   "description": "A better API for making Event Source requests, with all the features of fetch()",
   "homepage": "https://github.com/engineersamuel/fetch-event-source-stream#readme",
-  "repository": "engineersamuel/fetch-event-source-stream",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/engineersamuel/fetch-event-source-stream.git"
+  },
   "bugs": {
     "url": "https://github.com/engineersamuel/fetch-event-source-stream/issues"
   },
