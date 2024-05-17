@@ -1,5 +1,5 @@
 {
-  "name": "engineersamuel/fetch-event-source-stream",
+  "name": "@engineersamuel/fetch-event-source-stream",
   "version": "1.0.0",
   "description": "A better API for making Event Source requests, with all the features of fetch()",
   "homepage": "https://github.com/engineersamuel/fetch-event-source-stream#readme",
@@ -12,9 +12,9 @@
   "main": "src/index.ts",
   "sideEffects": false,
   "scripts": {
-    "clean": "rimraf ./lib ./coverage",
+    "clean": "rimraf ./lib",
     "prebuild": "npm run clean",
-    "build": "tsc && tsc -p tsconfig.esm.json",
+    "build": "tsc",
     "prepublishOnly": "npm run build && npm run test",
     "test": "vitest"
   },

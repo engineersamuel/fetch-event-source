@@ -1,0 +1,50 @@
+name: Publish to npm
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+          registry-url: "https://registry.npmjs.org"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test
+
+      - name: Bump version and push tag
+        id: bump_version
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const semver = require('semver');
+            const fs = require('fs');
+            const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+            const newVersion = semver.inc(pkg.version, 'patch');
+            pkg.version = newVersion;
+            fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2));
+            const { execSync } = require('child_process');
+            execSync(`git config --global user.email "Samuel.Mendenhall@gmail.com"`);
+            execSync(`git config --global user.name "Samuel Mendenhall"`);
+            execSync(`git commit -am "Bump version to ${newVersion}"`);
+            execSync(`git tag v${newVersion}`);
+            execSync(`git push --follow-tags`);
+
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish
