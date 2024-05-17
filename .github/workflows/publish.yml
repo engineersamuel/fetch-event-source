@@ -39,6 +39,8 @@ jobs:
             const { execSync } = require('child_process');
             execSync(`git config --global user.email "Samuel.Mendenhall@gmail.com"`);
             execSync(`git config --global user.name "Samuel Mendenhall"`);
+            execSync(`git remote set-url origin https://${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git`);
+            execSync('git add package.json');
             execSync(`git commit -am "Bump version to ${newVersion}"`);
             execSync(`git tag v${newVersion}`);
             execSync(`git push --follow-tags`);
